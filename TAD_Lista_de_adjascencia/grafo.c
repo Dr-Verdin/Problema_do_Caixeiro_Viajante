@@ -8,9 +8,9 @@ struct no{
     NO *prox;
 };
 
-struct grafo{
+struct grafo_{
     NO **A;
-    int v; //número de vértices
+    int v; 
     int arestas;
 };
 
@@ -28,7 +28,7 @@ GRAFO *grafo_criar(int n, int arestas){
     return grafo;
 }
 
-/*insere ar*/
+
 bool insere_aresta_grafo(GRAFO *grafo, int vertice_1, int vertice_2, int distancia){
     if(grafo!=NULL){
         int *aux=(int*)malloc(sizeof(int));
@@ -94,4 +94,32 @@ bool insere_aresta_grafo(GRAFO *grafo, int vertice_1, int vertice_2, int distanc
     }
 
 return (false); 
+}
+
+ITEM *busca_aresta_grafo(GRAFO *grafo, int cidade_1, int cidade_2){
+    if(grafo!=NULL){
+        NO *aux=grafo->A[cidade_1];
+
+        while(aux!=NULL){
+            if(item_get_chave(aux->item)==cidade_2){
+                return(aux->item);
+            }
+            aux=aux->prox;
+        }
+    }
+return(NULL);
+}
+
+void imprimir(GRAFO *grafo){
+    int teste, teste2;
+    for(int i=0; i<grafo->v;i++){
+        printf("%d: ", i+1);
+        for(NO *aux=grafo->A[i]; aux!=NULL; aux=aux->prox){
+            teste=item_get_chave(aux->item);
+            teste2=*((int*)item_get_dados(aux->item));
+
+            printf("%d(%d)->",teste, teste2);
+        }
+        printf("\n");
+    }
 }

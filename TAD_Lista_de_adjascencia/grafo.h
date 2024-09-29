@@ -7,4 +7,6 @@
 
     GRAFO *grafo_criar(int n, int arestas);
     bool insere_aresta_grafo(GRAFO *grafo, int vertice_1, int vertice_2, int distancia);
+    ITEM *busca_aresta_grafo(GRAFO *grafo, int cidade_1, int cidade_2);
+    void imprimir(GRAFO *grafo);
 #endif
