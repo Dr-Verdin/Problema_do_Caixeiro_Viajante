@@ -14,7 +14,7 @@ struct grafo_{
     int arestas;
 };
 
-GRAFO *grafo_criar(int n, int arestas){
+GRAFO *grafo_criar(int n){
     GRAFO *grafo = (GRAFO*)malloc(sizeof(GRAFO));
     if(grafo == NULL){
         printf("Erro de alocacao\n");
@@ -40,7 +40,7 @@ bool insere_aresta_grafo(GRAFO *grafo, int vertice_1, int vertice_2, int distanc
 
         *aux=distancia;
 
-        ITEM item=item_criar(vertice_2, aux);
+        ITEM *item=item_criar(vertice_2, aux);
         NO *no_1=(NO*)malloc(sizeof(NO));
 
         if(no_1==NULL){
@@ -63,7 +63,7 @@ bool insere_aresta_grafo(GRAFO *grafo, int vertice_1, int vertice_2, int distanc
             search->prox=no_1;
         }
 
-        ITEM item2=item_criar(vertice_1, aux);
+        ITEM *item2=item_criar(vertice_1, aux);
         NO *no_2=(NO*)malloc(sizeof(NO));
 
         if(no_2==NULL){
@@ -120,6 +120,6 @@ void imprimir(GRAFO *grafo){
 
             printf("%d(%d)->",teste, teste2);
         }
-        printf("\n");
+        printf("FIM\n");
     }
 }
