@@ -6,9 +6,9 @@
 
     typedef struct grafo_ GRAFO;
 
-    GRAFO *grafo_criar(int aresta);
-    bool insere_aresta_grafo(GRAFO *grafo, int cidade_1, int cidade_2, int distancia);
-    int get_distancia(GRAFO *grafo, int cidade_1, int cidade_2);
-    void imprimir(GRAFO *grafo);
+    GRAFO *grafo_criar(int vertice);
+    bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia);
+    int grafo_get_distancia(GRAFO *grafo, int cidade_1, int cidade_2);
+    void grafo_imprimir(GRAFO *grafo);
     void grafo_apagar(GRAFO **grafo);
 #endif

@@ -7,7 +7,7 @@ void findPath(int cidade_atual, int cidade_inicial, long int acumulador_distanci
     // Se já passou por todas as cidades
     if (caminho_len == qtd_cidades) {
         // Verifica se a última cidade é a cidade de origem
-        int distancia_retorno = get_distancia(grafo, cidade_atual, cidade_inicial);
+        int distancia_retorno = grafo_get_distancia(grafo, cidade_atual, cidade_inicial);
         if (distancia_retorno != -1) { // Se há caminho de volta
             long int total_distancia = acumulador_distancia + distancia_retorno;
             if (total_distancia < *menor_distancia) { // se a distância total for menor
@@ -23,7 +23,7 @@ void findPath(int cidade_atual, int cidade_inicial, long int acumulador_distanci
     } else {
         // Se não passou por todas as cidades ainda
         for (int prox_cidade = 0; prox_cidade < qtd_cidades; prox_cidade++) {
-            int distancia = get_distancia(grafo, cidade_atual, prox_cidade);
+            int distancia = grafo_get_distancia(grafo, cidade_atual, prox_cidade);
             if (distancia != -1) { // VErifica se há caminho
                 int cidade_visitada = 0;
                 for (int i = 0; i < caminho_len; i++) {
@@ -43,7 +43,7 @@ void findPath(int cidade_atual, int cidade_inicial, long int acumulador_distanci
 }
 
 // Função que chama a função recursiva
-void startPath(int cidade_atual, int cidade_objetivo, int qtd_cidades, int *menor_distancia, int menor_caminho[]){
+void startPath(int cidade_atual, int cidade_objetivo, int qtd_cidades, int *menor_distancia, int menor_caminho[], GRAFO *grafo){
     int arestas, cidade1, cidade2, distancia; 
     scanf(" %d", &arestas);
 
@@ -52,18 +52,14 @@ void startPath(int cidade_atual, int cidade_objetivo, int qtd_cidades, int *meno
         return;
     }
 
-    GRAFO *grafo = grafo_criar(arestas);
-
     for(int i = 0; i < arestas; i++){
         scanf(" %d %d %d", &cidade1, &cidade2, &distancia);
-        insere_aresta_grafo(grafo, cidade1, cidade2, distancia);
+        grafo_insere_aresta(grafo, cidade1, cidade2, distancia);
     }
 
     int caminho[qtd_cidades];
     caminho[0] = cidade_atual; // inicia o caminho com a cidade atual
     findPath(cidade_atual, cidade_objetivo, 0, caminho, 1, qtd_cidades, grafo, menor_distancia, menor_caminho); // chama a função recursiva
-
-    grafo_apagar(&grafo);
 }
 
 // Função Principal
@@ -74,6 +70,7 @@ int main(void){
         printf("ERRO: O número de cidades ultrapassou o limite permitido.\n");
         return 1;
     }
+    GRAFO *grafo = grafo_criar(qtd_cidades);
 
     int cidade_origem; // cidade de partida = cidade de cheagada
     scanf(" %d", &cidade_origem);
@@ -82,7 +79,7 @@ int main(void){
     int menor_caminho[qtd_cidades]; // para armazenar o menor caminho
 
     // chama a função para a cidade inicial
-    startPath(cidade_origem - 1, cidade_origem - 1, qtd_cidades, &menor_distancia, menor_caminho);
+    startPath(cidade_origem - 1, cidade_origem - 1, qtd_cidades, &menor_distancia, menor_caminho, grafo);
 
     // exibe a cidade de origem, a menor caminho encontrado e a menor distancia
     printf("Cidade Origem: %d\n", cidade_origem);
@@ -94,6 +91,10 @@ int main(void){
         }
     }
     printf("\nMenor Distância: %d\n", menor_distancia);
+
+    grafo_imprimir(grafo);
+
+    grafo_apagar(&grafo);
 
     return 0;
 }

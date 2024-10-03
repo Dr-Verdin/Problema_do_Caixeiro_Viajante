@@ -28,7 +28,7 @@ GRAFO *grafo_criar(int vertice){
 }
 
 
-bool insere_aresta_grafo(GRAFO *grafo, int cidade_1, int cidade_2, int distancia){
+bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia){
     if(grafo!=NULL){
         int *aux=(int*)malloc(sizeof(int));
 
@@ -94,7 +94,7 @@ bool insere_aresta_grafo(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
 return (false); 
 }
 
-int get_distancia(GRAFO *grafo, int cidade_1, int cidade_2){
+int grafo_get_distancia(GRAFO *grafo, int cidade_1, int cidade_2){
     if(grafo!=NULL){
         NO *aux=grafo->A[cidade_1-1];
 
@@ -108,7 +108,7 @@ int get_distancia(GRAFO *grafo, int cidade_1, int cidade_2){
 return(ERRO);
 }
 
-void imprimir(GRAFO *grafo){
+void grafo_imprimir(GRAFO *grafo){
     int teste, teste2;
 
     if(grafo!=NULL){
