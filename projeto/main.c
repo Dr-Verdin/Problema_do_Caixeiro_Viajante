@@ -4,8 +4,8 @@
 
 /*
 PROBLEMAS:
-- vetor caminho ou no vetor menor_caminho: não está imprimindo corretamente
-- tempo: demorado
+- vetor caminho ou no vetor menor_caminho: não está imprimindo corretamente no 4 e no 12 (mas as distancias estão corretas)
+- tempo: demorado, principalmente no 12
 */
 
 // Função recursiva para buscar o menor caminho
