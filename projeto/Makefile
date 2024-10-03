@@ -3,7 +3,7 @@
 
 ## main
 all: item.o grafo.o main.o
-	gcc item.o grafo.o main.o -o Batata -std=c99 -Wall
+	gcc item.o grafo.o main.o -o runabble -std=c99 -Wall
 
 item.o:
 	gcc -c item.c -o item.o
@@ -19,4 +19,4 @@ main.o:
 ##	gcc -c teste.c -o teste.o
 
 clean:
-	rm *.o Batata
+	rm *.o runabble

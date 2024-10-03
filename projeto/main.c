@@ -5,7 +5,9 @@
 /*
 PROBLEMAS:
 - vetor caminho ou no vetor menor_caminho: não está imprimindo corretamente no 4 e no 12 (mas as distancias estão corretas)
+    - suposição: está dando erro nas cidades que não tem ligação com todas as outras
 - tempo: demorado, principalmente no 12
+- colocar no make o timer
 */
 
 // Função recursiva para buscar o menor caminho
