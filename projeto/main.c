@@ -5,7 +5,7 @@
 /*
 PROBLEMAS:
 - vetor caminho ou no vetor menor_caminho: não está imprimindo corretamente no 4 e no 12 (mas as distancias estão corretas)
-    - suposição: está dando erro nas cidades que não tem ligação com todas as outras
+    - isso acontece pq os casos testes 4 e 12 começam com a cidade inicial 2 e aí por algum motivo a variavel qtd_cidades assume esse valor (encontrar onde isso ocorre)
 - tempo: demorado, principalmente no 12
 - colocar no make o timer
 */
@@ -35,7 +35,7 @@ void findPath(int cidade_atual, int cidade_inicial, long int acumulador_distanci
             if (distancia != -1) { // VErifica se há caminho
                 int cidade_visitada = 0;
                 for (int i = 0; i < caminho_len; i++) {
-                    if (caminho[i] == prox_cidade) { // Verifica se a cidade já foi visitadq
+                    if (caminho[i] == prox_cidade) { // Verifica se a cidade já foi visitada
                         cidade_visitada = 1;
                         break;
                     }
@@ -60,7 +60,7 @@ void startPath(int cidade_atual, int cidade_objetivo, int qtd_cidades, int *meno
         return;
     }
 
-    for(int i = 0; i < arestas; i++){
+    for(int i = 0; i < arestas; i++){ // insere as distancias no grafo
         scanf(" %d %d %d", &cidade1, &cidade2, &distancia);
         grafo_insere_aresta(grafo, cidade1, cidade2, distancia);
     }
@@ -78,6 +78,8 @@ int main(void){
         printf("ERRO: O número de cidades ultrapassou o limite permitido.\n");
         return 1;
     }
+
+    int qtd_cidades_rota = qtd_cidades; // quantidade de cidades numa rota
     GRAFO *grafo = grafo_criar(qtd_cidades);
 
     int cidade_origem; // cidade de partida = cidade de cheagada
@@ -88,19 +90,18 @@ int main(void){
 
     // chama a função para a cidade inicial
     startPath(cidade_origem, cidade_origem, qtd_cidades, &menor_distancia, menor_caminho, grafo);
-
+    
     // exibe a cidade de origem, a menor caminho encontrado e a menor distancia
     printf("Cidade Origem: %d\n", cidade_origem);
     printf("Rota: ");
-    for (int i = 0; i <= qtd_cidades; i++) {
-        printf("%d", menor_caminho[i]); // ajusta o indice na hora da impressão
-        if(i != qtd_cidades){
+    for (int i = 0; i <= qtd_cidades_rota; i++) {
+        printf("%d", menor_caminho[i]); 
+        if(i != qtd_cidades_rota){
             printf(" - ");
         }
     }
+    
     printf("\nMenor Distância: %d\n", menor_distancia);
-
-    grafo_imprimir(grafo);
 
     grafo_apagar(&grafo);
 
