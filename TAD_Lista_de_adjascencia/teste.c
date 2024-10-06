@@ -20,7 +20,10 @@ int main(void){
 
     dist=get_distancia(grafo, aux1, aux2);
 
-    printf("distancia entre a cidade %d e a %d: %d\n", aux1, aux2, dist);
+    if(dist>0){
+        printf("distancia entre a cidade %d e a %d: %d\n", aux1, aux2, dist);
+    }else
+    printf("Não existe caminho entre as cidades\n");
 
     imprimir(grafo);
 

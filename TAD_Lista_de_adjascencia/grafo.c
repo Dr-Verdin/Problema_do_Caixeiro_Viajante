@@ -6,6 +6,7 @@ typedef struct no NO;
 struct no{
     ITEM *item;
     NO *prox;
+    bool dado;
 };
 
 struct grafo_{
@@ -50,6 +51,7 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
 
         no_1->item=item;
         no_1->prox=NULL;
+        no_1->dado=true;
 
         if(grafo->A[cidade_1-1]==NULL){
             grafo->A[cidade_1-1]=no_1;
@@ -76,6 +78,7 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
 
         no_2->item=item2;
         no_2->prox=NULL;
+        no_2->dado=false;
 
         if(grafo->A[cidade_2-1]==NULL){
             grafo->A[cidade_2-1]=no_2;
@@ -134,6 +137,11 @@ void grafo_apagar(GRAFO **grafo){
             while (aux != NULL){
                 temp=aux;
                 aux = aux->prox;
+
+                if(temp->dado){
+                    free(item_get_dados(temp->item));
+                }
+                
                 item_apagar(&temp->item);
                 free(temp);
             }
