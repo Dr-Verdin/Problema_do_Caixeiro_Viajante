@@ -2,18 +2,21 @@
 #include <stdlib.h>
 #include "grafo.h"
 
+//Estrutura que define o tipo NO que representa um dos nós da lista de adjacência*/
 typedef struct no NO;
 struct no{
-    ITEM *item;
-    NO *prox;
-    bool dado;
+    ITEM *item; // ponteiro para o item que armazena o número de um cidade e sua distância em relação a outra da qual esse nó esta sendo adicionado na lista de adjacência.
+    NO *prox;// ponteiro para o próximo nó da lista de adjacẽncia.
+    bool dado;// variável que auxilia para saber se a alocação que foi feita para guardar a distância deve ser apagada.
 };
 
+//Estrutura principal que armazena um array de ponteiros para listas de adjacência
 struct grafo_{
-    NO **A;
-    int v; 
+    NO **A; // ponteiro duplo que aponta para o array de ponteiros que apontam para listas de adjacência.
+    int v; // número de cidades (vértices).
 };
 
+// Função que cria o grafo com o número de vértices passado nos parâmetros da chamada.
 GRAFO *grafo_criar(int vertice){
     GRAFO *grafo = (GRAFO*)malloc(sizeof(GRAFO));
     if(grafo == NULL){
@@ -23,23 +26,24 @@ GRAFO *grafo_criar(int vertice){
     grafo->v = vertice;
     grafo->A = (NO**)malloc(vertice* sizeof(NO*));
     for(int i = 0; i<vertice; i++){
-        grafo->A[i] = NULL;
+        grafo->A[i] = NULL; // Inicializa as listas de adjacência como vázias.
     }
     return grafo;
 }
 
-
+// Função que cria uma ligação entre duas cidades (aresta) e guarda a distância entre elas.
 bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia){
     if(grafo!=NULL){
-        int *aux=(int*)malloc(sizeof(int));
+        int *aux=(int*)malloc(sizeof(int)); //alocação de memória para a distância.
 
         if(aux==NULL){
             printf("Erro de alocação");
             return(false);
         }
 
-        *aux=distancia;
+        *aux=distancia; // Guarda a distância nessa memória alocada.
 
+        //Cria o ITEM e o nó que vai ser adicionado na lista de adjacência da cidade_1.
         ITEM *item=item_criar(cidade_2, aux);
         NO *no_1=(NO*)malloc(sizeof(NO));
 
@@ -53,6 +57,7 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
         no_1->prox=NULL;
         no_1->dado=true;
 
+        // Guarda o no_1 no final da lista de adjacência da cidade_1.
         if(grafo->A[cidade_1-1]==NULL){
             grafo->A[cidade_1-1]=no_1;
         }else{
@@ -64,6 +69,7 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
             search->prox=no_1;
         }
 
+        //Cria o ITEM e o nó que vai ser adicionado na lista de adjacência da cidade_2 com a mesma distância guardada no no_1..
         ITEM *item2=item_criar(cidade_1, aux);
         NO *no_2=(NO*)malloc(sizeof(NO));
 
@@ -80,6 +86,7 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
         no_2->prox=NULL;
         no_2->dado=false;
 
+        // Guarda o no_2 no final da lista de adjacência da cidade_2.
         if(grafo->A[cidade_2-1]==NULL){
             grafo->A[cidade_2-1]=no_2;
         }else{
