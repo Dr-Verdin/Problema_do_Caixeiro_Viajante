@@ -69,7 +69,7 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
             search->prox=no_1;
         }
 
-        //Cria o ITEM e o nó que vai ser adicionado na lista de adjacência da cidade_2 com a mesma distância guardada no no_1..
+        //Cria o ITEM e o nó que vai ser adicionado na lista de adjacência da cidade_2 com a mesma distância guardada no no_1.
         ITEM *item2=item_criar(cidade_1, aux);
         NO *no_2=(NO*)malloc(sizeof(NO));
 
