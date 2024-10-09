@@ -18,12 +18,12 @@ struct grafo_{
 
 // Função que cria o grafo com o número de vértices passado nos parâmetros da chamada.
 GRAFO *grafo_criar(int vertice){
-    GRAFO *grafo = (GRAFO*)malloc(sizeof(GRAFO));
+    GRAFO *grafo = (GRAFO*)malloc(sizeof(GRAFO)); 
     if(grafo == NULL){
         printf("Erro de alocacao\n");
         exit(1);
     }else
-    grafo->v = vertice;
+    grafo->v = vertice; // Atribui o valor passado pelo parâmetro da função a variável v que está contida dentro da estrutura grafo_.
     grafo->A = (NO**)malloc(vertice* sizeof(NO*));
     for(int i = 0; i<vertice; i++){
         grafo->A[i] = NULL; // Inicializa as listas de adjacência como vázias.
@@ -104,20 +104,22 @@ bool grafo_insere_aresta(GRAFO *grafo, int cidade_1, int cidade_2, int distancia
 return (false); 
 }
 
+// Função que retorna o valor da distância entre 2 cidades (cidade_1 e cidade_2).
 int grafo_get_distancia(GRAFO *grafo, int cidade_1, int cidade_2){
     if(grafo!=NULL){
         NO *aux=grafo->A[cidade_1-1];
 
         while(aux!=NULL){
             if(item_get_chave(aux->item)==cidade_2){
-                return(*((int*)item_get_dados(aux->item)));
+                return(*((int*)item_get_dados(aux->item))); // Retorna a distancia da cidade_1 para a cidade_2 se for encontrada.
             }
             aux=aux->prox;
         }
     }
-return(ERRO);
+return(ERRO);// Retorna "ERRO" se não encontrar a cidade_2.
 }
 
+//Função que imprime as listas de adjacência.
 void grafo_imprimir(GRAFO *grafo){
     int teste, teste2;
 
@@ -128,14 +130,15 @@ void grafo_imprimir(GRAFO *grafo){
                 teste=item_get_chave(aux->item);
                 teste2=*((int*)item_get_dados(aux->item));
 
-                printf("%d(%d)->",teste, teste2);
+                printf("%d(%d)->",teste, teste2); // Imprime a cidade adjacênte e a distância.
             }
             printf("FIM\n");
         }
     }else
-    printf("Não existe ou já foi apagado\n");
+    printf("Não existe ou já foi apagado\n"); // Se o grafo não existir imprime essa mensagem.
 }
 
+// Função que apaga tudo e libera as memórias alocadas.
 void grafo_apagar(GRAFO **grafo){
     if(grafo != NULL){
         NO *aux, *temp;
@@ -146,17 +149,17 @@ void grafo_apagar(GRAFO **grafo){
                 aux = aux->prox;
 
                 if(temp->dado){
-                    free(item_get_dados(temp->item));
+                    free(item_get_dados(temp->item)); // Se a memória que foi alocada para guardar a distância não foi desalocada é feito essa ação.
                 }
                 
-                item_apagar(&temp->item);
-                free(temp);
+                item_apagar(&temp->item); // Apaga o item que está guardado no nó.
+                free(temp); // Apaga o nó.
             }
             (*grafo)->A[i] = NULL;      
         }
-        free((*grafo)->A);
+        free((*grafo)->A); //Libera o array de listas de adjacência.
         (*grafo)->A = NULL;
-        free(*grafo);
+        free(*grafo);// Libera a estrutura que guardava a lista de ponteiros para listas de adjacência e o numero de cidades.
         *grafo = NULL;
     }
 }
