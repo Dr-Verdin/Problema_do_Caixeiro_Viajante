@@ -135,7 +135,7 @@ void ListaAdj_imprimir(LADJ *listas){
             printf("FIM\n");
         }
     }else
-    printf("Não existe ou já foi apagado\n"); // Se o grafo não existir imprime essa mensagem.
+    printf("Não existe ou já foi apagado\n"); // Se não existir a estrutura que guarda as listas de adjacência imprime essa mensagem.
 }
 
 // Função que apaga tudo e libera as memórias alocadas.
