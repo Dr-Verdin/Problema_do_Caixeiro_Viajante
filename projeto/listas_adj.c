@@ -17,7 +17,7 @@ struct listasAdj{
 };
 
 // Função que cria que aloca a estutura LADJ com o número de cidades passado nos parâmetros da chamada.
-LADJ *ListaAdj_criar(int vertice){
+LADJ *listaAdj_criar(int vertice){
     LADJ *listas = (LADJ*)malloc(sizeof(LADJ)); 
     if(listas == NULL){
         printf("Erro de alocacao\n");
@@ -32,7 +32,7 @@ LADJ *ListaAdj_criar(int vertice){
 }
 
 // Função que cria uma ligação entre duas cidades (aresta) e guarda a distância entre elas.
-bool ListaAdj_insere_caminho(LADJ *listas, int cidade_1, int cidade_2, int distancia){
+bool listaAdj_insere_distancia(LADJ *listas, int cidade_1, int cidade_2, int distancia){
     if(listas!=NULL){
         int *aux=(int*)malloc(sizeof(int)); //alocação de memória para a distância.
 
@@ -105,7 +105,7 @@ return (false);
 }
 
 // Função que retorna o valor da distância entre 2 cidades (cidade_1 e cidade_2).
-int ListaAdj_distancia(LADJ *listas, int cidade_1, int cidade_2){
+int listaAdj_get_distancia(LADJ *listas, int cidade_1, int cidade_2){
     if(listas!=NULL){
         NO *aux=listas->A[cidade_1-1];
 
@@ -120,7 +120,7 @@ return(ERRO);// Retorna "ERRO" se não encontrar a cidade_2.
 }
 
 //Função que imprime as listas de adjacência.
-void ListaAdj_imprimir(LADJ *listas){
+void listaAdj_imprimir(LADJ *listas){
     int teste, teste2;
 
     if(listas!=NULL){
@@ -139,7 +139,7 @@ void ListaAdj_imprimir(LADJ *listas){
 }
 
 // Função que apaga tudo e libera as memórias alocadas.
-void ListaAdj_apagar(LADJ **listas){
+void listaAdj_apagar(LADJ **listas){
     if(listas != NULL){
         NO *aux, *temp;
         for(int i = 0;  i< (*listas)->v; i++){

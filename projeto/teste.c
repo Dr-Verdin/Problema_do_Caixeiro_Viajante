@@ -13,20 +13,23 @@ int main(void){
 
         scanf("%d %d %d", &aux1, &aux2, &dist);
 
-        insere_aresta_grafo(grafo, aux1, aux2, dist);
+        grafo_insere_aresta(grafo, aux1, aux2, dist);
     }
 
     scanf(" %d %d", &aux1, &aux2);
 
-    dist=get_distancia(grafo, aux1, aux2);
+    dist=grafo_get_distancia(grafo, aux1, aux2);
 
-    printf("distancia entre a cidade %d e a %d: %d\n", aux1, aux2, dist);
+    if(dist>0){
+        printf("distancia entre a cidade %d e a %d: %d\n", aux1, aux2, dist);
+    }else
+    printf("Não existe caminho entre as cidades\n");
 
-    imprimir(grafo);
+    grafo_imprimir(grafo);
 
     grafo_apagar(&grafo);
 
-    imprimir(grafo);
+    grafo_imprimir(grafo);
 
 return (0);
 }
