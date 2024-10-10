@@ -37,7 +37,7 @@ void calcCaminho(int cidade_atual, int cidade_inicial, long int acumulador_dista
 
                 if (!cidade_visitada) { // se a cidade não foi visitada
                     caminho[caminho_len] = prox_cidade; // Adiciona a próxima cidade ao caminho
-                    calcDistancia(prox_cidade, cidade_inicial, acumulador_distancia + distancia, caminho, caminho_len + 1, qtd_cidades, listaAdj, menor_distancia, menor_caminho);
+                    calcCaminho(prox_cidade, cidade_inicial, acumulador_distancia + distancia, caminho, caminho_len + 1, qtd_cidades, listaAdj, menor_distancia, menor_caminho);
                 }
             }
         }
