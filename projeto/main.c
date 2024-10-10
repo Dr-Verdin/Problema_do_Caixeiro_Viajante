@@ -5,7 +5,7 @@
 #define INT_MAX 2147483647
 
 // Função recursiva para buscar o menor caminho
-void calcDistancia(int cidade_atual, int cidade_inicial, long int acumulador_distancia, int caminho[], int caminho_len, int qtd_cidades, LADJ *listaAdj, int *menor_distancia, int menor_caminho[]) {
+void calcCaminho(int cidade_atual, int cidade_inicial, long int acumulador_distancia, int caminho[], int caminho_len, int qtd_cidades, LADJ *listaAdj, int *menor_distancia, int menor_caminho[]) {
     // Se já passou por todas as cidades
     if (caminho_len == qtd_cidades) {
         // Verifica se a última cidade é a cidade de origem
@@ -61,7 +61,7 @@ void lerDistancias(int cidade_origem, int qtd_cidades, int *menor_distancia, int
 
     int caminho[qtd_cidades];
     caminho[0] = cidade_origem; // inicia o caminho com a cidade atual
-    calcDistancia(cidade_origem, cidade_origem, 0, caminho, 1, qtd_cidades, listaAdj, menor_distancia, menor_caminho); // chama a função recursiva
+    calcCaminho(cidade_origem, cidade_origem, 0, caminho, 1, qtd_cidades, listaAdj, menor_distancia, menor_caminho); // chama a função recursiva
 }
 
 // Função Principal
